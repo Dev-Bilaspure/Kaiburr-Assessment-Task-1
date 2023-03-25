@@ -54,10 +54,10 @@ This project provides REST API endpoints to manage server documents.
 
 ```json
 {
-  "serverId": "1",
-  "name": "Server1",
-  "framework": "Spring",
-  "language": "Java"
+	"_id": "641f19379f849b5cc399c25d",
+	"name": "payments-server",
+	"language": "C#",
+	"framework": ".NET"
 }
 ```
 
