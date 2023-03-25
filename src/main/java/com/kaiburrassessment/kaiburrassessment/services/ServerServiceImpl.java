@@ -4,6 +4,8 @@ import java.util.*;
 
 import com.kaiburrassessment.kaiburrassessment.repository.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.kaiburrassessment.kaiburrassessment.entities.Server;
@@ -137,5 +139,28 @@ public class ServerServiceImpl implements ServerService {
 			System.out.println("An error occurred while deleting the server: " + e.getMessage());
 		}
 		return null;
+	}
+
+	/**
+	 * Retrieves a server with the given name from the data source.
+	 *
+	 * @param name The name of the server to retrieve.
+	 * @return The server with the given name, or null if no such server exists.
+	 */
+	@Override
+	public ResponseEntity<Server> getServerByName(String name) {
+		try {
+			// Retrieve the Server object with the specified name from the repository
+			Optional<Server> server = Optional.ofNullable(serverRepository.findByName(name));
+			if (server.isPresent()) {
+				return ResponseEntity.ok(server.get());
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception e) {
+			// Handle any exceptions
+			System.err.println("An error occurred while retrieving the server: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 }

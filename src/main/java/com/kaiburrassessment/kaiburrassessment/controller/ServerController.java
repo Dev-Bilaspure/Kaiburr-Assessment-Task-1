@@ -3,6 +3,7 @@ package com.kaiburrassessment.kaiburrassessment.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.kaiburrassessment.kaiburrassessment.entities.Server;
@@ -31,9 +32,14 @@ public class ServerController {
 		return serverService.getServerById((serverId));
 	}
 
-	@GetMapping("/running")
-	public List<Server> getServersByRunningStatus(@RequestParam("isRunning") boolean isRunning) {
-		return serverService.getServerByIsRunning(isRunning);
+	@GetMapping("/status/{isRunning}")
+	public List<Server> getServersByRunningStatus(@PathVariable String isRunning) {
+		return serverService.getServerByIsRunning(Boolean.parseBoolean((isRunning)));
+	}
+
+	@GetMapping("/name/{name}")
+	public ResponseEntity<Server> getServersByName(@PathVariable String name) {
+		return serverService.getServerByName(name);
 	}
 
 	@PostMapping

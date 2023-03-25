@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Indexed;
 
 @Document(collection = "server")
 @Data
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Server {
 	@Id
 	private String serverId;
+//	@Indexed(unique = true)
 	private String name;
 	private String language;
 	private String framework;
