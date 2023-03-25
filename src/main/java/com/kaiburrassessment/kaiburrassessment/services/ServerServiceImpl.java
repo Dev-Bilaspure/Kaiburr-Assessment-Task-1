@@ -39,30 +39,6 @@ public class ServerServiceImpl implements ServerService {
 	}
 
 
-
-	/**
-	 * Retrieve a list of all server objects currently stored in the system with the specified "isRunning" status.
-	 *
-	 * @param isRunning a Boolean value indicating the desired "isRunning" status of the servers to retrieve
-	 * @return a list of Server objects with the specified "isRunning" status
-	 */
-	@Override
-	public ResponseEntity<List<Server>> getServerByIsRunning(Boolean isRunning) {
-		try {
-			List<Server> servers = serverRepository.findByIsRunning(isRunning);
-			if (!servers.isEmpty()) {
-				return ResponseEntity.ok(servers); // Return the list of Server objects with a success status code
-			} else {
-				return ResponseEntity.notFound().build(); // Return a failure status code if no servers with the specified "isRunning" status are found
-			}
-		} catch (Exception e) {
-			// handling exception
-			System.out.println("An error occurred while retrieving the list of servers: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return an error status code
-		}
-	}
-
-
 	/**
 	 * Retrieve a server object from the system with the specified server ID.
 	 *
@@ -120,7 +96,6 @@ public class ServerServiceImpl implements ServerService {
 			existingServer = serverRepository.findById(server.getServerId()).orElse(null);
 			if (existingServer != null) { // If the existing server is found, update its properties
 				existingServer.setName(server.getName());
-				existingServer.setIsRunning(server.getIsRunning());
 				existingServer.setFramework(server.getFramework());
 				existingServer.setLanguage(server.getLanguage());
 				serverRepository.save(existingServer); // Save the updated server object to the repository
@@ -161,18 +136,18 @@ public class ServerServiceImpl implements ServerService {
 	}
 
 	/**
-	 * Retrieves a server with the given name from the data source.
+	 * Retrieves all the servers with the given name from the data source.
 	 *
 	 * @param name The name of the server to retrieve.
-	 * @return The server with the given name, or null if no such server exists.
+	 * @return The List of servers with the given name, or null if no such server exists.
 	 */
 	@Override
-	public ResponseEntity<Server> getServerByName(String name) {
+	public ResponseEntity<List<Server>> getServerByName(String name) {
 		try {
-			// Retrieve the Server object with the specified name from the repository
-			Optional<Server> server = Optional.ofNullable(serverRepository.findByName(name));
-			if (server.isPresent()) {
-				return ResponseEntity.ok(server.get());
+			// Retrieve all Server objects with the specified name from the repository
+			List<Server> servers = serverRepository.findAllByName(name);
+			if (!servers.isEmpty()) {
+				return ResponseEntity.ok(servers);
 			} else {
 				return ResponseEntity.notFound().build();
 			}

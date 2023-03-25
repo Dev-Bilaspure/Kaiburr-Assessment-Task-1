@@ -14,10 +14,9 @@ import org.springframework.stereotype.Indexed;
 public class Server {
 	@Id
 	private String serverId;
-//	@Indexed(unique = true)
+
 	private String name;
 	private String language;
 	private String framework;
-	private Boolean isRunning;
 	
 }

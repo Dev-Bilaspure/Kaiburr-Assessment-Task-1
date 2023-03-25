@@ -40,16 +40,9 @@ public class ServerController {
 	}
 
 
-	// This endpoint returns a list of servers based on their isRunning field
-	@GetMapping("/status/{isRunning}")
-	public ResponseEntity<List<Server>> getServersByRunningStatus(@PathVariable String isRunning) {
-		return serverService.getServerByIsRunning(Boolean.parseBoolean((isRunning)));
-	}
-
-
 	// This endpoint returns a single server by its name.
 	@GetMapping("/name/{name}")
-	public ResponseEntity<Server> getServersByName(@PathVariable String name) {
+	public ResponseEntity<List<Server>> getServersByName(@PathVariable String name) {
 		return serverService.getServerByName(name);
 	}
 
