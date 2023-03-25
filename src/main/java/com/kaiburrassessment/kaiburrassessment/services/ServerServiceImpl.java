@@ -23,14 +23,19 @@ public class ServerServiceImpl implements ServerService {
 	 * @return a list of all Server objects in the system
 	 */
 	@Override
-	public List<Server> getAllServers()  {
+	public ResponseEntity<List<Server>> getAllServers()  {
 		try {
-			return serverRepository.findAll(); // Retrieve all Server objects from the repository and return them
+			List<Server> servers = serverRepository.findAll();
+			if (!servers.isEmpty()) {
+				return ResponseEntity.ok(servers); // Return the list of Server objects with a success status code
+			} else {
+				return ResponseEntity.notFound().build(); // Return a failure status code if no servers are found
+			}
 		} catch (Exception e) {
 			// handling exception
 			System.out.println("An error occurred while retrieving the list of servers: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return an error status code
 		}
-		return null;
 	}
 
 
@@ -42,14 +47,19 @@ public class ServerServiceImpl implements ServerService {
 	 * @return a list of Server objects with the specified "isRunning" status
 	 */
 	@Override
-	public List<Server> getServerByIsRunning(Boolean isRunning) {
+	public ResponseEntity<List<Server>> getServerByIsRunning(Boolean isRunning) {
 		try {
-			return serverRepository.findByIsRunning(isRunning); // Retrieve Server objects from the repository with the specified "isRunning" status and return them
+			List<Server> servers = serverRepository.findByIsRunning(isRunning);
+			if (!servers.isEmpty()) {
+				return ResponseEntity.ok(servers); // Return the list of Server objects with a success status code
+			} else {
+				return ResponseEntity.notFound().build(); // Return a failure status code if no servers with the specified "isRunning" status are found
+			}
 		} catch (Exception e) {
 			// handling exception
 			System.out.println("An error occurred while retrieving the list of servers: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return an error status code
 		}
-		return null;
 	}
 
 
@@ -60,14 +70,19 @@ public class ServerServiceImpl implements ServerService {
 	 * @return the Server object with the specified ID, or null if no such server exists
 	 */
 	@Override
-	public Server getServerById(String serverId) {
+	public ResponseEntity<Server> getServerById(String serverId) {
 		try {
-			return serverRepository.findById(serverId).orElse(null); // Retrieve the Server object with the specified ID from the repository and return it, or null if no such server exists
+			Server server = serverRepository.findById(serverId).orElse(null);
+			if (server != null) {
+				return ResponseEntity.ok(server); // Return the Server object with a success status code
+			} else {
+				return ResponseEntity.notFound().build(); // Return a failure status code if no server with the specified ID is found
+			}
 		} catch (Exception e) {
 			// handling exception
 			System.out.println("An error occurred while retrieving the server: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Return an error status code
 		}
-		return null;
 	}
 
 
@@ -78,14 +93,15 @@ public class ServerServiceImpl implements ServerService {
 	 * @return the newly added Server object
 	 */
 	@Override
-	public Server addServer(Server server) {
+	public ResponseEntity<Server> addServer(Server server) {
 		try {
-			return serverRepository.save(server); // Add the Server object to the repository and return it
+			Server addedServer = serverRepository.save(server); // Add the Server object to the repository and return it
+			return ResponseEntity.ok(addedServer);
 		} catch (Exception e) {
 			// handling exception
 			System.out.println("An error occurred while adding the server: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return server;
 	}
 
 
@@ -97,7 +113,7 @@ public class ServerServiceImpl implements ServerService {
 	 * @return the updated Server object that has been saved
 	 */
 	@Override
-	public Server updateServer(Server server) {
+	public ResponseEntity<Server> updateServer(Server server) {
 		Server existingServer = null; // Declare a variable to store the existing server object
 		try {
 			// Try to find the existing server object in the repository by its ID
@@ -108,12 +124,15 @@ public class ServerServiceImpl implements ServerService {
 				existingServer.setFramework(server.getFramework());
 				existingServer.setLanguage(server.getLanguage());
 				serverRepository.save(existingServer); // Save the updated server object to the repository
+				return ResponseEntity.ok(existingServer);
+			} else {
+				return ResponseEntity.notFound().build();
 			}
 		} catch(Exception e) { // If an error occurs, catch it and log a message
 			// handle exception
 			System.out.println("An error occurred while updating the server: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return existingServer; // Return the updated server object
 	}
 
 
@@ -125,20 +144,20 @@ public class ServerServiceImpl implements ServerService {
 	 * @return a String message indicating the status of the operation
 	 */
 	@Override
-	public String deleteServerById(String serverId) {
+	public ResponseEntity<String> deleteServerById(String serverId) {
 		try {
 			Optional<Server> existingServer = serverRepository.findById(serverId); // Retrieve the Server object with the specified ID from the repository
 			if (existingServer.isPresent()) {
 				serverRepository.delete(existingServer.get()); // Delete the Server object from the repository
-				return "Server with ID " + serverId + " has been deleted"; // Return a success message
+				return ResponseEntity.ok("Server with ID " + serverId + " has been deleted"); // Return a success message
 			} else {
-				return "Server with ID " + serverId + " does not exist"; // Return a failure message
+				return ResponseEntity.notFound().build(); // Return a failure message
 			}
 		} catch (Exception e) {
 			// handling exception
 			System.out.println("An error occurred while deleting the server: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return null;
 	}
 
 	/**

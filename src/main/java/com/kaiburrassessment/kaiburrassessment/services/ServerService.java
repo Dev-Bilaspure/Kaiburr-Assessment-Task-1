@@ -7,12 +7,12 @@ import org.springframework.http.ResponseEntity;
 
 public interface ServerService {
 
-	public List<Server> getAllServers();
-	public List<Server> getServerByIsRunning(Boolean isRunning);
-	public Server getServerById(String serverId);
-	public Server addServer(Server server);
-	public Server updateServer(Server server);
-	public String deleteServerById(String serverId);
+	public ResponseEntity<List<Server>> getAllServers();
+	public ResponseEntity<List<Server>> getServerByIsRunning(Boolean isRunning);
+	public ResponseEntity<Server> getServerById(String serverId);
+	public ResponseEntity<Server> addServer(Server server);
+	public ResponseEntity<Server> updateServer(Server server);
+	public ResponseEntity<String> deleteServerById(String serverId);
 	public ResponseEntity<Server> getServerByName(String name);
 
 }

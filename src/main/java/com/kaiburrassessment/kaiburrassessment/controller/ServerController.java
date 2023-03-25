@@ -23,17 +23,17 @@ public class ServerController {
 		return "Server is running...";
 	}
 	@GetMapping
-	public List<Server> getAllServers() {
+	public ResponseEntity<List<Server>> getAllServers() {
 		return serverService.getAllServers();
 	}
 
 	@GetMapping("/{serverId}")
-	public Server getServerById(@PathVariable String serverId) {
+	public ResponseEntity<Server> getServerById(@PathVariable String serverId) {
 		return serverService.getServerById((serverId));
 	}
 
 	@GetMapping("/status/{isRunning}")
-	public List<Server> getServersByRunningStatus(@PathVariable String isRunning) {
+	public ResponseEntity<List<Server>> getServersByRunningStatus(@PathVariable String isRunning) {
 		return serverService.getServerByIsRunning(Boolean.parseBoolean((isRunning)));
 	}
 
@@ -43,17 +43,17 @@ public class ServerController {
 	}
 
 	@PostMapping
-	public Server addServer(@RequestBody Server server) {
+	public ResponseEntity<Server> addServer(@RequestBody Server server) {
 		return serverService.addServer(server);
 	}
 
 	@PutMapping
-	public Server updateServer(@RequestBody Server server) {
+	public ResponseEntity<Server> updateServer(@RequestBody Server server) {
 		return serverService.updateServer(server);
 	}
 
 	@DeleteMapping("/{serverId}")
-	public String deleteServer(@PathVariable String serverId) {
+	public ResponseEntity<String> deleteServer(@PathVariable String serverId) {
 		return serverService.deleteServerById(serverId);
 	}
 
