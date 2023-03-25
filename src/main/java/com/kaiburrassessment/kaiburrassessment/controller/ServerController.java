@@ -20,26 +20,6 @@ public class ServerController {
 	@Autowired
 	private ServerService serverService;
 	
-	@GetMapping("/home")
-	public String home() {
-		return("This is home page");
-	}
-	
-	
-	//get the list of servers
-	@GetMapping("/servers")
-	public List<Server> getServers() {
-		return(this.serverService.getServers());
-	}
-	
-	@GetMapping("/servers/{serverId}")
-	public Server getServer(@PathVariable String serverId) {
-		return(this.serverService.getServer(serverId));
-	}
-	
-	@PostMapping("/server")
-	public Server addServer(@RequestBody Server server) {
-		return(this.serverService.addServer(server));
-	}
+
 	
 }

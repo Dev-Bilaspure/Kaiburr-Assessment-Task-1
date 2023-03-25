@@ -6,9 +6,12 @@ import com.kaiburrassessment.kaiburrassessment.entities.Server;
 
 public interface ServerService {
 
-	public List<Server> getServers();
-	
-	public Server getServer(String serverId);
-	
+	public List<Server> getAllServers();
+	public List<Server> getServerByIsRunning(Boolean isRunning);
+	public Server getServerById(String serverId);
 	public Server addServer(Server server);
+	public Server updateServer(Server server);
+	public String deleteServerById(String serverId);
+
+
 }
