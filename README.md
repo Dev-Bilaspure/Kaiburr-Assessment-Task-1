@@ -1,5 +1,6 @@
-# Kaiburr-Assessment-By-Dev-B
-This is a Spring Boot application.
+# Task-1-Kaiburr-Assessment
+#### This reposity is for Task 1 from the Kaiburr's Assessment submitted by Dev Bilaspure.
+
 
 ## REST API Endpoints
 This project provides REST API endpoints to manage server documents.
