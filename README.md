@@ -1,7 +1,14 @@
 # Task-1-Kaiburr-Assessment
-#### This reposity is for Task 1 from the Kaiburr's Assessment submitted by Dev Bilaspure.
+#### The purpose of this repository is to provide a solution to Task 1 from the Kaiburr's Assessment. Submitted by Dev Bilaspure.
 
+### Task Description
+The task is to implement a Java application that provides a REST API with endpoints for searching, creating, deleting and updating "server" objects.  
+All "Server" objects should be stored in a MongoDB database. The implementation should include appropriate error handling and should be testable using tools such as Postman, curl, or any other HTTP client.
 
+### Project Description
+This is a Java application built with Spring Boot that provides a REST API for managing "server" objects. The application uses MongoDB as the backend database to store the server objects.  
+The API is fully tested and comes with appropriate error handling to ensure reliability and accuracy.  
+This repository provides a complete solution to the task and includes detailed documentation and code examples to help you get started. Feel free to clone, fork, or modify this repository to suit your needs.
 ## REST API Endpoints
 This project provides REST API endpoints to manage server documents.
 ### Endpoints
@@ -50,7 +57,7 @@ This project provides REST API endpoints to manage server documents.
 ### Request and Response
 - All requests and responses are in JSON format.
 
-#### Server document example
+## Server document example
 
 ```json
 {
