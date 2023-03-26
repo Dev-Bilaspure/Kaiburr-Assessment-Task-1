@@ -13,6 +13,7 @@ import com.kaiburrassessment.kaiburrassessment.services.ServerService;
 
 @RestController
 @RequestMapping("/api/servers")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ServerController {
 	
 	@Autowired
