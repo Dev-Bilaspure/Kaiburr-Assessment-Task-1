@@ -2,6 +2,7 @@ package com.kaiburrassessment.kaiburrassessment.controller;
 
 import java.util.List;
 
+import com.kaiburrassessment.kaiburrassessment.constants.PathConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,6 @@ import com.kaiburrassessment.kaiburrassessment.services.ServerService;
 
 
 @RestController
-@RequestMapping("/api/servers")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ServerController {
 	
@@ -28,42 +28,42 @@ public class ServerController {
 
 
 	// This endpoint returns a list of all servers in the system.
-	@GetMapping
+	@RequestMapping(method = RequestMethod.GET, value = PathConstants.GET_ALL_SERVERS)
 	public ResponseEntity<List<Server>> getAllServers() {
 		return serverService.getAllServers();
 	}
 
 
 	// This endpoint returns a single server by its ID.
-	@GetMapping("/{serverId}")
+	@RequestMapping(method = RequestMethod.GET, value = PathConstants.GET_SERVER_BY_ID)
 	public ResponseEntity<Server> getServerById(@PathVariable String serverId) {
 		return serverService.getServerById((serverId));
 	}
 
 
 	// This endpoint returns a single server by its name.
-	@GetMapping("/name/{name}")
+	@RequestMapping(method = RequestMethod.GET, value = PathConstants.GET_SERVER_BY_NAME)
 	public ResponseEntity<List<Server>> getServersByName(@PathVariable String name) {
 		return serverService.getServerByName(name);
 	}
 
 
 	// This endpoint adds a new server to the system.
-	@PostMapping
+	@RequestMapping(method = RequestMethod.POST, value = PathConstants.ADD_SERVER)
 	public ResponseEntity<Server> addServer(@RequestBody Server server) {
 		return serverService.addServer(server);
 	}
 
 
 	// This endpoint updates an existing server.
-	@PutMapping
+	@RequestMapping(method = RequestMethod.PUT, value = PathConstants.UPDATE_SERVER)
 	public ResponseEntity<Server> updateServer(@RequestBody Server server) {
 		return serverService.updateServer(server);
 	}
 
 
 	// This endpoint deletes a server by its ID.
-	@DeleteMapping("/{serverId}")
+	@RequestMapping(method = RequestMethod.DELETE, value = PathConstants.DELETE_SERVER)
 	public ResponseEntity<String> deleteServer(@PathVariable String serverId) {
 		return serverService.deleteServerById(serverId);
 	}
