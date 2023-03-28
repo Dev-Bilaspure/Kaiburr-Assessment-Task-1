@@ -66,3 +66,15 @@ This repository provides a complete solution to the task and includes detailed d
 }
 ```
 
+## JUnit Testing
+#### The application includes the following 6 JUnit test methods to test the REST endpoints:  
+
+- `deleteServerByIdTest()`: This method tests the `DELETE` endpoint to delete a server by its ID. It verifies that the server is deleted successfully and returns the expected status code.  
+- `updateServerTest()`:  This method tests the `PUT` endpoint to update a server's information. It verifies that the server information is updated correctly and returns the expected status code.
+- `getServerByName()`: This method tests the `GET` endpoint to retrieve a server's information by its name. It verifies that the server information is returned correctly and returns the expected status code.  
+- `getServerByIDTest()`: This method tests the `GET` endpoint to retrieve a server's information by its ID. It verifies that the server information is returned correctly and returns the expected status code.  
+- `getAllServersTest()`: This method tests the `GET` endpoint to retrieve all servers' information. It verifies that all server information is returned correctly and returns the expected status code.  
+- `addServerTest()`: This method tests the `POST` endpoint to add a new server. It verifies that the server is added successfully and returns the expected status code.  
+
+### Sample Test Results
+![junittest](screenshots/junit-testing.png)
