@@ -5,10 +5,10 @@ The task is to implement a Java application that provides a REST API with endpoi
 All "Server" objects should be stored in a MongoDB database. The implementation should include appropriate error handling and should be testable using tools such as Postman, curl, or any other HTTP client.
 
 ### Project Description
-This is a Java application built with Spring Boot that provides a REST API for managing "server" objects. The application uses MongoDB as the backend database to store the server objects.  
-The API is fully tested and comes with appropriate error handling and logging to ensure reliability, accuracy, better debugging.  
-The project also incorporates JUnit testing for REST API endpoints.  
-This project provides a complete solution to the task and includes detailed documentation and code examples to help you get started. Feel free to clone, fork, or modify this repository to suit your needs.  
+- This is a Java application built with Spring Boot that provides a REST API for managing "server" objects. The application uses MongoDB as the backend database to store the server objects.  
+- The API is fully tested and comes with appropriate error handling and logging to ensure reliability, accuracy, better debugging.  
+- The project also incorporates JUnit testing for REST API endpoints.  
+- This project provides a complete solution to the task and includes detailed documentation and code examples to help you get started. Feel free to clone, fork, or modify this repository to suit your needs.  
 
 ## REST API Endpoints
 #### 1. Get list of all servers
